@@ -1,0 +1,58 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int val) : data(val), next(nullptr) {}
+};
+
+class LinkedListStack {
+private:
+    Node* top;
+
+public:
+    LinkedListStack() : top(nullptr) {}
+
+    void push(int val) {
+        Node* newNode = new Node(val);
+        newNode->next = top;
+        top = newNode;
+    }
+
+    int pop() {
+        if (!top) {
+            cerr << "Error: Stack underflow!" << endl;
+            return -1;
+        }
+        int val = top->data;
+        Node* temp = top;
+        top = top->next;
+        delete temp;
+        return val;
+    }
+
+    int peek() {
+        if (!top) {
+            cerr << "Error: Stack is empty!" << endl;
+            return -1;
+        }
+        return top->data;
+    }
+
+    bool isEmpty() {
+        return top == nullptr;
+    }
+
+    void print() {
+        cout << "Stack (Top to Bottom): ";
+        Node* temp = top;
+        while (temp) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+};
