@@ -1,0 +1,36 @@
+class BST {
+private:
+    struct Node {
+        int key;
+        Node *left, *right, *parent;
+        Node(int k) : key(k), left(nullptr), right(nullptr), parent(nullptr) {}
+    };
+
+    Node* root;
+
+    void transplant(Node* u, Node* v) {
+        if (!u->parent) root = v;
+        else if (u == u->parent->left) u->parent->left = v;
+        else u->parent->right = v;
+        if (v) v->parent = u->parent;
+    }
+
+public:
+    void deleteNode(Node* z) {
+        if (!z->left) transplant(z, z->right);
+        else if (!z->right) transplant(z, z->left);
+        else {
+            Node* y = z->right;
+            while (y->left) y = y->left;
+            if (y->parent != z) {
+                transplant(y, y->right);
+                y->right = z->right;
+                y->right->parent = y;
+            }
+            transplant(z, y);
+            y->left = z->left;
+            y->left->parent = y;
+        }
+        delete z;
+    }
+};
