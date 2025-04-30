@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+
+class Matrix1D {
+private:
+    int* data;
+    int rows;
+    int cols;
+
+public:
+    Matrix1D(int r, int c) : rows(r), cols(c) {
+        data = new int[rows * cols];
+    }
+
+    ~Matrix1D() {
+        delete[] data;
+    }
+
+    void set(int i, int j, int val) {
+        data[i * cols + j] = val;
+    }
+
+    int get(int i, int j) {
+        return data[i * cols + j];
+    }
+
+    void print() {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                cout << data[i * cols + j] << " ";
+            }
+            cout << endl;
+        }
+    }
+};
