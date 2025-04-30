@@ -1,0 +1,17 @@
+class PriorityQueue {
+private:
+    MaxHeap heap;
+
+public:
+    void enqueue(int val) {
+        heap.insert(val);
+    }
+
+    int dequeue() {
+        return heap.extractMax();
+    }
+
+    bool isEmpty() {
+        return heap.size() == 0;
+    }
+};
