@@ -1,0 +1,58 @@
+#include <iostream>
+using namespace std;
+
+class TreeNode {
+public:
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+class BinaryTree {
+private:
+    TreeNode* root;
+
+    void preOrder(TreeNode* node) {
+        if (!node) return;
+        cout << node->val << " ";
+        preOrder(node->left);
+        preOrder(node->right);
+    }
+
+    void inOrder(TreeNode* node) {
+        if (!node) return;
+        inOrder(node->left);
+        cout << node->val << " ";
+        inOrder(node->right);
+    }
+
+    void postOrder(TreeNode* node) {
+        if (!node) return;
+        postOrder(node->left);
+        postOrder(node->right);
+        cout << node->val << " ";
+    }
+
+public:
+    BinaryTree() : root(nullptr) {}
+
+    void setRoot(TreeNode* node) {
+        root = node;
+    }
+
+    void printPreOrder() {
+        preOrder(root);
+        cout << endl;
+    }
+
+    void printInOrder() {
+        inOrder(root);
+        cout << endl;
+    }
+
+    void printPostOrder() {
+        postOrder(root);
+        cout << endl;
+    }
+};
